@@ -1,0 +1,15 @@
+{% extends "aplicacion_garras/base.html" %}
+
+{% block title %}{{ accion }} Cargo - Garras{% endblock %}
+
+{% block main %}
+<main class="form-page">
+    <h2>{{ accion }} Cargo</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-save">{{ accion }}</button>
+        <a href="{% url 'cargos' %}" class="btn-cancel">Cancelar</a>
+    </form>
+</main>
+{% endblock %}

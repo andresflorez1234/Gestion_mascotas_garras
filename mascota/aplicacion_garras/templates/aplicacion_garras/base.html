@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tienda Garras{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'aplicacion_garras/base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="header">
+            <div class="logo-placeholder">
+                <img src="{% static 'img/logo.png' %}" alt="Logo Garras">
+                <div class="logo-text"></div>
+            </div>
+            <div class="title">
+                {% block header_title %}Tienda de productos para mascotas: "Garras"{% endblock %}
+            </div>
+        </div>
+
+        {% block main %}
+            <main>
+            ...
+            </main>
+        {% endblock %}
+
+        <div class="footer">
+            <div class="contact-info">Contáctanos</div>
+            <div>
+                <div class="footer-logo">
+                    <img src="{% static 'img/logo.png' %}" alt="Logo Proyecto" class="logo-img">
+                </div>
+                <div class="footer-text">Proyecto</div>
+            </div>
+        </div>
+
+    </div>
+
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

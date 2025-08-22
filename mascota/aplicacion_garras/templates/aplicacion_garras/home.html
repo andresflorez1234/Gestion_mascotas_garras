@@ -1,0 +1,45 @@
+{% extends "aplicacion_garras/base.html" %}
+{% load static %}
+
+{% block title %}Inicio - Garras{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'aplicacion_garras/home.css' %}">
+{% endblock %}
+
+{% block main %}
+<main>
+    <div class="home-container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <li><a href="{% url 'cargos' %}">Cargos</a></li>
+                <li><a href="{% url 'personas' %}">Personas</a></li>
+                <li><a href="{% url 'usuarios' %}">Usuarios</a></li>
+                <li><a href="{}">Administradores</a></li>
+                <li><form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background:none;border:none;color:#007bff;cursor:pointer;padding:0;">Cerrar sesión</button>
+                </form></li>
+            </ul>
+        </aside>
+
+        <section class="content">
+            <h2>Contenido</h2>
+            <div class="image-box">
+                <img src="{% static 'img/logo.png' %}" alt="Mascota feliz">
+            </div>
+        </section>
+
+        <section class="mision">
+            <h2>Misión</h2>
+            <p></p>
+        </section>
+
+        <section class="vision">
+            <h2>Visión</h2>
+            <p></p>
+        </section>
+    </div>
+</main>
+{% endblock %}

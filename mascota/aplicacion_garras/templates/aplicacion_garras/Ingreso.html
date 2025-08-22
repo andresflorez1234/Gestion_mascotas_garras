@@ -1,0 +1,44 @@
+{% extends "aplicacion_garras/base.html" %}
+{% load static %}
+
+{% block title %}Ingreso - Tienda Garras{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'aplicacion_garras/ingreso.css' %}">
+{% endblock %}
+
+{% block header_title %}
+    Tienda de productos para mascotas: "Garras"
+{% endblock %}
+
+{% block main %}
+<main>
+    <div class="login-section">
+        <h2 class="section-title">Ingresar al Sistema</h2>
+
+        <div class="login-container">
+            {% if error %}
+                <div style="color: red; margin-bottom: 10px;">{{ error }}</div>
+            {% endif %}
+            <form class="login-form" method="post">
+                {% csrf_token %}
+                <div class="form-title">Login</div>
+
+                <div class="form-row">
+                    <label class="form-label">Usuario: *</label>
+                    <input type="text" name="username" class="form-input" placeholder="Ingrese su usuario">
+                </div>
+
+                <div class="form-row">
+                    <label class="form-label">Contraseña: *</label>
+                    <input type="password" name="password" class="form-input password-input" placeholder="••••••••••">
+                </div>
+
+                <button type="submit" class="login-button">Ingresar</button>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+

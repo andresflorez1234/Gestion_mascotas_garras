@@ -1,0 +1,15 @@
+{% extends "aplicacion_garras/base.html" %}
+
+{% block title %}Eliminar Cargo - Garras{% endblock %}
+
+{% block main %}
+<main class="confirm-page">
+    <h2>¿Eliminar cargo?</h2>
+    <p>¿Seguro que deseas eliminar el cargo <strong>{{ cargo.cargo }}</strong>?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-delete">Sí, eliminar</button>
+        <a href="{% url 'cargos' %}" class="btn-cancel">Cancelar</a>
+    </form>
+</main>
+{% endblock %}

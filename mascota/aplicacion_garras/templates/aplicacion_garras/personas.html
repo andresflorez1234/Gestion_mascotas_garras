@@ -1,0 +1,51 @@
+{% extends "aplicacion_garras/base.html" %}
+{% load static %}
+
+{% block title %}Personas - Garras{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'aplicacion_garras/personas.css' %}">
+{% endblock %}
+
+{% block main %}
+<main>
+    <nav class="tabs-navigation">
+        <a href="{% url 'inicio' %}" class="tab-link">Inicio</a>
+        <a href="{% url 'cargos' %}" class="tab-link active">Cargos</a>
+        <a href="{% url 'personas' %}" class="tab-link">Personas</a>
+        <a href="{% url 'usuarios' %}" class="tab-link">Usuarios</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="content-header">
+            <h2>Lista de Personas</h2>
+        </div>
+
+        <div class="table-container">
+            <table class="personas-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for persona in personas %}
+                    <tr>
+                        <td>{{ persona.id_persona }}</td>
+                        <td>{{ persona.nombre }}</td>
+                        <td>{{ persona.apellido }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">No hay personas registradas.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</main>
+{% endblock %}

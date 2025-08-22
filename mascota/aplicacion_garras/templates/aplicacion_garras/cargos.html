@@ -1,0 +1,57 @@
+{% extends "aplicacion_garras/base.html" %}
+{% load static %}
+
+{% block title %}Cargos - Garras{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'aplicacion_garras/personas.css' %}">
+{% endblock %}
+
+{% block main %}
+<main>
+    <nav class="tabs-navigation">
+        <a href="{% url 'inicio' %}" class="tab-link">Inicio</a>
+        <a href="{% url 'cargos' %}" class="tab-link active">Cargos</a>
+        <a href="{% url 'personas' %}" class="tab-link">Personas</a>
+        <a href="{% url 'usuarios' %}" class="tab-link">Usuarios</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="content-header">
+            <h2>Lista de Cargos</h2>
+            <div class="actions">
+                <a href="{% url 'agregar_cargo'%}" class="btn-add" role="button" aria-label="Agregar cargo">
+                    + Agregar cargo
+                </a>
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <table class="personas-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cargo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tipo in tipos %}
+                    <tr>
+                        <td>{{ tipo.id_tipo }}</td>
+                        <td>{{ tipo.cargo }}</td>
+                        <td>
+                            <a href="{% url 'editar_cargo' tipo.id_tipo %}" class="btn-edit">Editar</a>
+                            <a href="{% url 'eliminar_cargo' tipo.id_tipo %}" class="btn-delete">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">No hay cargos registrados.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+{% endblock %}
