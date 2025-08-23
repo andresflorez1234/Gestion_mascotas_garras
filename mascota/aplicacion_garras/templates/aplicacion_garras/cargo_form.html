@@ -1,9 +1,38 @@
 {% extends "aplicacion_garras/base.html" %}
+{% load static %}
 
 {% block title %}{{ accion }} Cargo - Garras{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'aplicacion_garras/personas.css' %}">
+<style>
+    html, body {
+    height: 100%;
+    margin: 0;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* altura mínima de toda la pantalla */
+    }
+
+    main.form-page {
+        flex: 1; /* hace que ocupe el espacio disponible */
+    }
+
+</style>
+{% endblock %}
+
 {% block main %}
 <main class="form-page">
+    <nav class="tabs-navigation">
+        <a href="{% url 'inicio' %}" class="tab-link">Inicio</a>
+        <a href="{% url 'cargos' %}" class="tab-link">Cargos</a>
+        <a href="{% url 'personas' %}" class="tab-link active">Personas</a>
+        <a href="{% url 'usuarios' %}" class="tab-link">Usuarios</a>
+    </nav>
+
     <h2>{{ accion }} Cargo</h2>
     <form method="post">
         {% csrf_token %}
