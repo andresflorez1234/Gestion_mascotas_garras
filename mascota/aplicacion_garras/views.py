@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Usuario, Tipo, Persona
-from .forms import TipoForm
+from .forms import TipoForm, PersonaForm, UsuarioForm
 from django.contrib import messages
 
 # Create your views here.
@@ -27,17 +27,6 @@ def logout(request):
 def lista_cargos(request):
     tipos = Tipo.objects.all()
     return render(request, "aplicacion_garras/cargos.html", {"tipos": tipos})
-
-
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from .models import Tipo, Persona
-from .forms import TipoForm
-
-def lista_cargos(request):
-    tipos = Tipo.objects.all()
-    return render(request, "aplicacion_garras/cargos.html", {"tipos": tipos})
-
 
 def agregar_cargo(request):
     if request.method == "POST":
@@ -74,6 +63,35 @@ def listar_personas(request):
     personas = Persona.objects.all()
     return render(request, "aplicacion_garras/personas.html", {"personas": personas})
 
+def crear_persona(request):
+    if request.method == "POST":
+        form = PersonaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("personas")
+    else:
+        form = PersonaForm()
+    return render(request, "aplicacion_garras/persona_form.html", {"form": form, "action": "Crear"})
+
+
+def editar_persona(request, id_persona):
+    persona = get_object_or_404(Persona, id_persona=id_persona)
+    if request.method == "POST":
+        form = PersonaForm(request.POST, instance=persona)
+        if form.is_valid():
+            form.save()
+            return redirect("personas")
+    else:
+        form = PersonaForm(instance=persona)
+    return render(request, "aplicacion_garras/persona_form.html", {"form": form, "action": "Editar"})
+
+
+def eliminar_persona(request, id_persona):
+    persona = get_object_or_404(Persona, id_persona=id_persona)
+    if request.method == "POST":
+        persona.delete()
+        return redirect("personas")
+    return render(request, "aplicacion_garras/persona_confirm_delete.html", {"persona": persona})
 
 
 # usuarios
@@ -81,6 +99,33 @@ def listar_usuarios(request):
     usuarios = Usuario.objects.all()
     return render(request, "aplicacion_garras/usuarios.html", {"usuarios": usuarios})
 
+def crear_usuario(request):
+    if request.method == "POST":
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("usuarios")
+    else:
+        form = UsuarioForm()
+    return render(request, "aplicacion_garras/usuario_form.html", {"form": form, "action": "Crear"})
+
+def editar_usuario(request, id_persona, id_tipo):
+    usuario = get_object_or_404(Usuario, id_persona=id_persona, id_tipo=id_tipo)
+    if request.method == "POST":
+        form = UsuarioForm(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+            return redirect("usuarios")
+    else:
+        form = UsuarioForm(instance=usuario)
+    return render(request, "aplicacion_garras/usuario_form.html", {"form": form, "action": "Editar"})
+
+def eliminar_usuario(request, id_persona, id_tipo):
+    usuario = get_object_or_404(Usuario, id_persona=id_persona, id_tipo=id_tipo)
+    if request.method == "POST":
+        usuario.delete()
+        return redirect("usuarios")
+    return render(request, "aplicacion_garras/usuario_confirm_delete.html", {"usuario": usuario})
 
 # redirecciones a las paginas
 def home(request):

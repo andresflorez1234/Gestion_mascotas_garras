@@ -14,7 +14,13 @@ urlpatterns = [
 
     # personas
     path("personas/", views.listar_personas, name="personas"),
+    path("crear/", views.crear_persona, name="crear_persona"),
+    path("editar/<int:id_persona>/", views.editar_persona, name="editar_persona"),
+    path("eliminar/<int:id_persona>/", views.eliminar_persona, name="eliminar_persona"),
 
     # usuarios
     path('usuarios/', views.listar_usuarios, name='usuarios'),
+    path("usuarios/crear/", views.crear_usuario, name="crear_usuario"),
+    path("usuarios/editar/<int:id_persona>/<int:id_tipo>/", views.editar_usuario, name="editar_usuario"),
+    path("usuarios/eliminar/<int:id_persona>/<int:id_tipo>/", views.eliminar_usuario, name="eliminar_usuario"),
 ]

@@ -9,6 +9,13 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.content-header {
+    display: flex;
+    justify-content: space-between; /* separa título a la izquierda y botón a la derecha */
+    align-items: center; /* centra verticalmente */
+    margin-bottom: 20px;
+}
+
 
 .logo-section {
     margin-right: 20px;
@@ -76,6 +83,22 @@
     font-weight: 500;
     border-right: 1px solid #7c3aed;
     transition: background-color 0.2s ease;
+}
+
+.btns {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 5px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: 1px solid #007bff;
 }
 
 

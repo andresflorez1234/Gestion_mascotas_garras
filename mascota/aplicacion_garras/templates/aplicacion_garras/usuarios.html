@@ -9,44 +9,49 @@
 
 {% block main %}
 <main>
-        <nav class="tabs-navigation">
-            <a href="{% url 'inicio' %}" class="tab-link">Inicio</a>
-            <a href="{% url 'cargos' %}" class="tab-link">Cargos</a>
-            <a href="{% url 'personas' %}" class="tab-link">Personas</a>
-            <a href="{% url 'usuarios' %}" class="tab-link active">Usuarios</a>
-        </nav>
+    <nav class="tabs-navigation">
+        <a href="{% url 'inicio' %}" class="tab-link">Inicio</a>
+        <a href="{% url 'cargos' %}" class="tab-link">Cargos</a>
+        <a href="{% url 'personas' %}" class="tab-link">Personas</a>
+        <a href="{% url 'usuarios' %}" class="tab-link active">Usuarios</a>
+    </nav>
 
-        <div class="main-content">
-            <div class="content-header">
-                <h2>Lista de Usuarios</h2>
-            </div>
-            
-            <div class="table-container">
-                <table class="usuarios-table">
-                    <thead>
-                        <tr>
-                            <th>Id_persona</th>
-                            <th>Id_tipo</th>
-                            <th>Usuario</th>
-                            <th>Contraseña</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for Usuario in usuarios %}
-                        <tr>
-                            <td>{{ Usuario.id_persona }}</td>
-                            <td>{{ Usuario.id_tipo }}</td>
-                            <td>{{ Usuario.usuario }}</td>
-                            <td>{{ Usuario.pass_field }}</td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="4">No hay usuarios registrados</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+    <div class="main-content">
+        <div class="content-header">
+            <h2>Lista de Usuarios</h2>
+            <a href="{% url 'crear_usuario' %}" class="btns btn-primary">Crear Usuario</a>
+        </div>
+        
+        <div class="table-container">
+            <table class="usuarios-table">
+                <thead>
+                    <tr>
+                        <th>Id_persona</th>
+                        <th>Id_tipo</th>
+                        <th>Usuario</th>
+                        <th>Contraseña</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.id_persona }}</td>
+                        <td>{{ usuario.id_tipo }}</td>
+                        <td>{{ usuario.usuario }}</td>
+                        <td>{{ usuario.pass_field }}</td>
+                        <td>
+                            <a href="{% url 'editar_usuario' usuario.id_persona.id_persona usuario.id_tipo.id_tipo %}" class="btn btn-sm btn-warning">Editar</a>
+                            <a href="{% url 'eliminar_usuario' usuario.id_persona.id_persona usuario.id_tipo.id_tipo %}" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">No hay usuarios registrados</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </main>

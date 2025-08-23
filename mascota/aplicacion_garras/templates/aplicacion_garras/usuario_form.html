@@ -1,0 +1,49 @@
+{% extends "aplicacion_garras/base.html" %}
+{% load static %}
+
+{% block title %}{{ action }} Usuario - Garras{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'aplicacion_garras/usuarios.css' %}">
+{% endblock %}
+
+{% block main %}
+<main>
+    <nav class="tabs-navigation">
+        <a href="{% url 'inicio' %}" class="tab-link">Inicio</a>
+        <a href="{% url 'cargos' %}" class="tab-link">Cargos</a>
+        <a href="{% url 'personas' %}" class="tab-link">Personas</a>
+        <a href="{% url 'usuarios' %}" class="tab-link active">Usuarios</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="content-header">
+            <h2>{{ action }} Usuario</h2>
+        </div>
+
+        <form method="post" class="usuario-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.id_persona.id_for_label }}">Persona</label>
+                {{ form.id_persona }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.id_tipo.id_for_label }}">Tipo</label>
+                {{ form.id_tipo }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.usuario.id_for_label }}">Usuario</label>
+                {{ form.usuario }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.pass_field.id_for_label }}">Contraseña</label>
+                {{ form.pass_field }}
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">{{ action }}</button>
+                <a href="{% url 'usuarios' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}
